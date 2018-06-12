@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
-	Conf "./src/config"
+	Conf "./config"
 )
 
 func main() {
