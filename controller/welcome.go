@@ -6,7 +6,8 @@ import (
 	viewModel "../model/view"
 )
 
-func WelcomeIndex(w http.ResponseWriter, r *http.Request) {
+func (ctrl *Ctrl)  WelcomeIndex(w http.ResponseWriter, r *http.Request) {
 	indexVm := viewModel.WelcomeIndexViewModel{FirstName: "John", LastName: "Doe"}
 	viewRenderer.Render("welcome/index", indexVm, w)
 }
+

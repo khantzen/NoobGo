@@ -4,9 +4,20 @@ import (
 	"log"
 	"net/http"
 	Conf "./config"
+	"./repository"
+	m "./model"
 )
 
 func main() {
-	Conf.SetRouting()
+	db, err := repository.InitDatabase()
+
+	if err != nil {
+		log.Panic(err)
+	}
+
+	env := &m.Env{Repo: db}
+
+
+	Conf.SetRouting(env)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
