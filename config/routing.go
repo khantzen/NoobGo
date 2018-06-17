@@ -16,20 +16,17 @@ func SetRouting(env *model.Env) *RegexpHandler {
 
 
 	// http.HandleFunc("/Welcome", ctrl.WelcomeIndex)
-	handler.HandleFunc("(?i)/Welcome", ctrl.WelcomeIndex)
+	handler.HandleFunc("^(?i)/Welcome", ctrl.WelcomeIndex)
 
 
 	// User Controller
 		// Authenticate
-	handler.HandleFunc("(?i)/User/Authenticate", ctrl.UserAuthenticate)
+	handler.HandleFunc("^(?i)/User/Authenticate", ctrl.UserAuthenticate)
 		// Register
-	handler.HandleFunc("(?i)/User/Register", ctrl.UserRegister)
+	handler.HandleFunc("^(?i)/User/Register", ctrl.UserRegister)
 
-	http.Handle(
-		"/media/",
-		http.StripPrefix(
-			"/media/",
-			http.FileServer(http.Dir("media"))))
+	handler.Handler("^\\/media\\/", http.StripPrefix("/media/", http.FileServer(http.Dir("media"))))
+
 
 	return &handler
 

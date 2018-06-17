@@ -15,8 +15,9 @@ type RegexpHandler struct {
 }
 
 func (hdl *RegexpHandler) Handler(
-	pattern *regexp.Regexp,
+	strRegexp string,
 	handler http.Handler) {
+	pattern, _ := regexp.Compile(strRegexp)
 	hdl.routes = append(hdl.routes, &route{pattern: pattern, handler: handler})
 }
 
