@@ -18,6 +18,6 @@ func main() {
 	env := &m.Env{Repo: db}
 
 
-	Conf.SetRouting(env)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	handler := Conf.SetRouting(env)
+	log.Fatal(http.ListenAndServe(":8080", handler))
 }
