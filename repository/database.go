@@ -2,6 +2,7 @@ package repository
 
 import (
 	"database/sql"
+	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"../model/db"
 )
@@ -15,7 +16,7 @@ type DB struct {
 }
 
 func InitDatabase() (*DB, error) {
-	db, err := sql.Open("mysql", "root:root@localhost/noobGoDb")
+	db, err := sql.Open("mysql", "root:root@/noobGoDb")
 
 	if err != nil {
 		log.Panic(err)
