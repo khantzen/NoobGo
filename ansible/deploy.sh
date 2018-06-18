@@ -2,9 +2,9 @@
 
 # go build command
 # classic
-# go build -o ansible/build/website main.go
+go build -o ansible/build/website ../main.go
 # raspberry
-env GOOS=linux GOARCH=arm GOARM=5 go build -o build/website ../main.go
+# env GOOS=linux GOARCH=arm GOARM=5 go build -o build/website ../main.go
 
 
 ansible webserver -m ping
