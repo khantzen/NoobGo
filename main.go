@@ -4,18 +4,18 @@ import (
 	"log"
 	"net/http"
 	Conf "./config"
-	"./repository"
-	m "./model"
+	Model "./model"
+	Repo "./repository"
 )
 
 func main() {
-	db, err := repository.InitDatabase()
+	db, err := Repo.InitDatabase()
 
 	if err != nil {
 		log.Panic(err)
 	}
 
-	env := &m.Env{Repo: db}
+	env := &Model.Env{Repo: db}
 
 
 	handler := Conf.SetRouting(env)

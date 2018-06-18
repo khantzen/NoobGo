@@ -46,7 +46,7 @@ func renderView(view string, model interface{}, w http.ResponseWriter) {
 }
 
 func getViewTemplate(view string) *template.Template {
-	fileName := "views/" + view + ".html"
+	fileName := "media/views/" + view + ".html"
 	viewTemplate, _ := template.ParseFiles(fileName)
 	return viewTemplate
 }

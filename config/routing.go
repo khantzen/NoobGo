@@ -1,12 +1,10 @@
 package config
 
-import "net/http"
-import "../model"
 import (
 	"../controller"
+	"../model"
+	"net/http"
 )
-
-
 
 
 func SetRouting(env *model.Env) *RegexpHandler {

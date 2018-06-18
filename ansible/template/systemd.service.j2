@@ -1,0 +1,12 @@
+[Unit]
+Description={{ deploy.websiteDescription }}
+After=network.target auditd.service syslog.target
+
+[Service]
+Type=simple
+User={{ deploy.owner }}
+Group={{ deploy.owner }}
+ExecStart=/bin/bash {{ deploy.serverAppRoot }}{{ deploy.serverAppFile }}
+
+[Install]
+WantedBy=multi-user.target

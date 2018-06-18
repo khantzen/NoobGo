@@ -1,0 +1,37 @@
+---
+# This playbook aims at installing your go website on a server
+# It is just one example, don't use it without your sysadmin advice
+
+- hosts: webserver
+  become: yes
+
+  tasks:
+    - name: Move go package to server
+      copy:
+        src: "{{ deploy.localAppPath }}"
+        dest: "{{ deploy.serverAppRoot }}/{{ deploy.serverAppFile }}"
+        owner: "{{ deploy.owner }}"
+        mode: 0777
+
+    - name: Move media file
+      copy:
+        src: "../media/"
+        dest: "{{ deploy.serverAppRoot }}"
+        owner: "{{ deploy.owner }}"
+        mode: 0777
+
+    - name: Deploy system.d unit
+      template:
+        src: template/systemd.service.j2
+        dest: "/etc/systemd/system/{{ deploy.serverAppFile }}.service"
+        mode: 0755
+        force: yes
+        owner: root
+        group: root
+
+    - name: Start service
+      systemd:
+        name: "{{ deploy.serverAppFile }}"
+        daemon_reload: yes
+        state: restarted
+

@@ -1,0 +1,7 @@
+deploy:
+  localAppPath: build/website
+  serverAppRoot: #Path where to put your binary file on your server
+  serverAppFile: #Your binary file name on your server
+  websiteDescription: #Your service description
+  owner: #Binary file owner username
+
