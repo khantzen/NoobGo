@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 	"os"
 	vm "../model/view"
+	"strings"
 )
 
 func Render(view string, model interface{}, w http.ResponseWriter) {
@@ -55,7 +56,7 @@ func getFilesList(root string) ([]string, error) {
 	var files []string
 	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 		if !info.IsDir() {
-			files = append(files, path)
+			files = append(files, strings.Replace(path, "\\", "/", 0)) // For windows compatibility
 		}
 		return nil
 	})
