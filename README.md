@@ -141,8 +141,8 @@ import (
 
 func (db *DB) GetUserList() (*[]dbm.UserDb) {
 	rows, err := db.Query(
-		"Select *" +
-			" From users")
+		" Select *" +
+		" From users")
 
 	if err != nil {
 		log.Fatal(err)
@@ -251,12 +251,119 @@ NoobGo will execute our previous method _UserDisplayList_.
 
 ### Views
 
-#### Html
-#### Css
-#### Javascript
+In our controller we've called a method named _Render_ giving it a string param "user/list" and our viewModel
+
+```go
+vr.Render("user/list", displayViewModel, w)
+```
+
+We will now create our html/css/javascript linked to this view. 
+
+Inside _media_ folder you will find three subfolders
+
+```
+project
+|_ media
+   |_css
+   |_js
+   |_views
+```
+
+In our controller we want to render _user/list_ so let's create html, css and javascript file linked
+to this view
+
+```
+project
+|_ media
+   |_css
+     |_main
+     |_user
+       | list.css
+   |_js
+     |_main
+     |_user
+       | list.js
+   |_views
+     | main.html
+     |_user
+       | list.html
+```
+
+css and javascript files in _css/main_ and _js/main_ folders will always be imported in all of your page
+in alphabetical order.
+
+_css/user/list.css_ and _js/user/list.js_ files will be imported only on _user/list_ view always after the main import.
+
+_views/main.html_ is here to put it all together, you can edit it as much as you want but remember 
+that his content will be displayed on every pages.
+
+In _css/main/main.css_ add the following code :
+
+```css
+body {
+    background-color: aliceblue;
+}
+
+.list_item {
+    height: 15px;
+    line-height: 15px;
+    padding: 3px;
+    clear: both;
+}
+
+.list_container .list_item:nth-child(2n){
+    background-color: red;
+}
+
+.list_container .list_item:nth-child(2n + 1){
+    background-color: green;
+}
+
+```
+
+In _css/user/list.css_ add the following code :
+
+
+```css
+.user {
+    width: 100%;
+}
+
+.item {
+    display: inline-block;
+    float: left;
+}
+
+.name {
+    width: 20%;
+}
+
+.date {
+    width: 80%;
+}
+```
+
+in _js/user/list.js_ add the following code :
+```javascript
+alert("Hello World");
+```
+
+in _views/user/list.html_ add the following code :
+
+```html
+<div id="userList" class="list_container">
+{{ range .UserList }}
+    <div class="user list_item">
+        <div class="item name">{{ .UserName }}</div>
+        <div class="item date">{{ .CreationDate.Format "2006-01-02" }}</div>
+    </div>
+{{ end }}
+</div>
+```
+
 
 ## Demo
-A demo will be available soon on another repositories
+A demo will be available soon on another repository
 
 ## Deploy on your server
 Not finished yet
